@@ -1,18 +1,22 @@
 # 🚌 School Transport Management System (DBMS Project Prototype)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(GitHub%20Pages)-success?style=for-the-badge&logo=github)](https://gudavallijagadeesh28.github.io/school-transport-dbms/)
 [![Web Platform](https://img.shields.io/badge/Platform-Vanilla%20JS%20%7C%20HTML5%20%7C%20CSS3-blue)](index.html)
 [![DBMS PBL](https://img.shields.io/badge/Curriculum-DBMS%20Project--Based%20Learning-success)](#-database-design--relational-schema-3nf)
-[![GitHub Pages Compatible](https://img.shields.io/badge/GitHub%20Pages-Ready-brightgreen)](https://github.com/GudavalliJagadeesh28/school-transport-dbms)
 
+> ### 🌐 Live Deployed Application
+> **🚀 Access the Live Web App:** [https://gudavallijagadeesh28.github.io/school-transport-dbms/](https://gudavallijagadeesh28.github.io/school-transport-dbms/)
+>
 > ### 🎓 Student & Academic Project Information
 > | Field | Details |
 > | :--- | :--- |
-> | **Student Name** | **Gudavalli Jagadeesh ** |
+> | **Student Name** | **Gudavalli Jagadeesh** |
 > | **Roll Number** | **25WU0102090** |
 > | **Section / Cohort** | **AIML Rhinos** (AI & Machine Learning) |
 > | **Course** | **Database Management Systems (DBMS / DBMS PBL)** |
 > | **GitHub Profile** | **[@GudavalliJagadeesh28](https://github.com/GudavalliJagadeesh28)** |
+> | **Live Demo URL** | **[https://gudavallijagadeesh28.github.io/school-transport-dbms/](https://gudavallijagadeesh28.github.io/school-transport-dbms/)** |
 > | **Project Repository** | **[school-transport-dbms](https://github.com/GudavalliJagadeesh28/school-transport-dbms)** |
 
 A modern, responsive, multi-role web prototype engineered for the **School Transport Route & Student Pickup Management System** DBMS curriculum. This project translates relational database theories (normalization, 3NF schemas, foreign key relationships, triggers, and transactional integrity constraints) into a reactive, interactive front-end application with client-side database simulation and persistent storage.
