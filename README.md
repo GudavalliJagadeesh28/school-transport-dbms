@@ -5,6 +5,16 @@
 [![DBMS PBL](https://img.shields.io/badge/Curriculum-DBMS%20Project--Based%20Learning-success)](#-database-design--relational-schema-3nf)
 [![GitHub Pages Compatible](https://img.shields.io/badge/GitHub%20Pages-Ready-brightgreen)](https://github.com/GudavalliJagadeesh28/school-transport-dbms)
 
+> ### 🎓 Student & Academic Project Information
+> | Field | Details |
+> | :--- | :--- |
+> | **Student Name** | **Gudavalli Jagadeesh (G. Jagadeesh)** |
+> | **Roll Number** | **25WU0102090** |
+> | **Section / Cohort** | **AIML Rhinos** (AI & Machine Learning) |
+> | **Course** | **Database Management Systems (DBMS / DBMS PBL)** |
+> | **GitHub Profile** | **[@GudavalliJagadeesh28](https://github.com/GudavalliJagadeesh28)** |
+> | **Project Repository** | **[school-transport-dbms](https://github.com/GudavalliJagadeesh28/school-transport-dbms)** |
+
 A modern, responsive, multi-role web prototype engineered for the **School Transport Route & Student Pickup Management System** DBMS curriculum. This project translates relational database theories (normalization, 3NF schemas, foreign key relationships, triggers, and transactional integrity constraints) into a reactive, interactive front-end application with client-side database simulation and persistent storage.
 
 ---
@@ -84,6 +94,10 @@ flowchart TD
 ## 📊 Entity-Relationship (ER) Diagram
 
 The following Chen/Crow's Foot Entity-Relationship diagram illustrates all database entities, their primary/foreign key attributes, and the relationship cardinalities between them:
+
+<p align="center">
+  <img src="er_diagram.svg" alt="School Transport Management System ER Diagram" width="100%">
+</p>
 
 ```mermaid
 erDiagram
@@ -545,17 +559,25 @@ You can deploy this prototype live on GitHub Pages:
 ```text
 school-transport-dbms/
 ├── .gitignore                                 # Git configuration file ignoring temporary files
-├── README.md                                  # Comprehensive DBMS documentation, ER diagrams, and walkthrough
+├── README.md                                  # Full project documentation, ER diagrams, 3NF schemas, and student info
+├── DATA_DICTIONARY.md                         # Exhaustive tabular data dictionary and seed data records
+├── database_schema.sql                        # Executable MySQL DDL schema, triggers, inserts, and analytical queries
+├── er_diagram.svg                             # High-resolution standalone vector ER Diagram
 ├── index.html                                 # Single-file interactive prototype (GitHub Pages entry point)
-├── School Transport Management System.html   # Named prototype matching local deployment
+├── School Transport Management System.html   # Standalone web prototype
 ├── app.js                                     # Extracted JavaScript source code (business rules, triggers, controllers)
-└── styles.css                                 # Extracted CSS styles (theme variables, layout, responsive design)
+├── styles.css                                 # Extracted CSS styles (theme variables, layout, responsive design)
+├── School_Transport_DBMS_Review1.pptx         # Review 1 Presentation Slides (Conceptual design & ER modeling)
+├── School_Transport_DBMS_Review2.pptx         # Review 2 Presentation Slides (3NF normalization & SQL schema)
+└── School_Transport_DBMS_Review3.pptx         # Review 3 Presentation Slides (Prototype implementation & testing)
 ```
 
 ---
 
-## 👥 Authors & Academic Credits
-- **Project Title:** School Transport Management System
-- **Curriculum:** DBMS Project-Based Learning (PBL)
-- **Developer:** [Gudavalli Jagadeesh](https://github.com/GudavalliJagadeesh28)
+## 👥 Student & Academic Credits
+- **Student Name:** Gudavalli Jagadeesh (G. Jagadeesh)
+- **Roll Number:** 25WU0102090
+- **Section / Cohort:** AIML Rhinos (Artificial Intelligence & Machine Learning)
+- **Course:** Database Management Systems (DBMS / DBMS PBL)
+- **GitHub Profile:** [@GudavalliJagadeesh28](https://github.com/GudavalliJagadeesh28)
 - **Repository:** [https://github.com/GudavalliJagadeesh28/school-transport-dbms](https://github.com/GudavalliJagadeesh28/school-transport-dbms)

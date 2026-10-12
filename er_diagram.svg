@@ -1,0 +1,252 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 860" width="100%" height="100%" style="background:#0f172a;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Title Header -->
+  <text x="600" y="42" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="700" letter-spacing="0.5">School Transport Management System — Entity-Relationship Diagram (3NF)</text>
+  <text x="600" y="66" text-anchor="middle" fill="#94a3b8" font-size="13">Conceptual &amp; Logical Relational Architecture (Chen / Crow's Foot Notation)</text>
+
+  <!-- Legend -->
+  <g transform="translate(830, 20)">
+    <rect width="330" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <circle cx="20" cy="24" r="6" fill="#f59e0b"/>
+    <text x="32" y="28" fill="#e2e8f0" font-size="11" font-weight="600">PK (Primary Key)</text>
+    <circle cx="130" cy="24" r="6" fill="#38bdf8"/>
+    <text x="142" y="28" fill="#e2e8f0" font-size="11" font-weight="600">FK (Foreign Key)</text>
+    <circle cx="240" cy="24" r="6" fill="#10b981"/>
+    <text x="252" y="28" fill="#e2e8f0" font-size="11" font-weight="600">UK (Unique)</text>
+  </g>
+
+  <!-- Entity Styles -->
+  <style>
+    .card { fill: #1e293b; stroke: #334155; stroke-width: 1.5; rx: 8px; }
+    .header-core { fill: #1e40af; }
+    .header-transit { fill: #0f766e; }
+    .header-finance { fill: #854d0e; }
+    .header-ops { fill: #475569; }
+    .title { fill: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+    .attr { fill: #cbd5e1; font-size: 11px; }
+    .pk { fill: #f59e0b; font-weight: 700; }
+    .fk { fill: #38bdf8; font-weight: 600; }
+    .uk { fill: #34d399; }
+    .type { fill: #64748b; font-size: 10px; font-family: monospace; }
+    .rel-line { stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 4,4; fill: none; }
+    .rel-text { fill: #94a3b8; font-size: 10px; font-weight: 600; }
+  </style>
+
+  <!-- 1. BUS -->
+  <g transform="translate(50, 100)" filter="url(#shadow)">
+    <rect width="200" height="150" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-core"/>
+    <rect width="200" height="10" y="18" fill="#1e40af"/>
+    <text x="100" y="19" text-anchor="middle" class="title">BUS</text>
+    <text x="12" y="48" class="attr pk">PK  bus_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr uk">UK  reg_no</text><text x="188" y="70" text-anchor="end" class="type">VARCHAR(20)</text>
+    <text x="12" y="92" class="attr">    capacity</text><text x="188" y="92" text-anchor="end" class="type">INT (&gt;0)</text>
+    <text x="12" y="114" class="attr">    model</text><text x="188" y="114" text-anchor="end" class="type">VARCHAR(50)</text>
+    <text x="12" y="136" class="attr">    status</text><text x="188" y="136" text-anchor="end" class="type">ENUM</text>
+  </g>
+
+  <!-- 2. ROUTE -->
+  <g transform="translate(370, 100)" filter="url(#shadow)">
+    <rect width="200" height="150" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-transit"/>
+    <rect width="200" height="10" y="18" fill="#0f766e"/>
+    <text x="100" y="19" text-anchor="middle" class="title">ROUTE</text>
+    <text x="12" y="48" class="attr pk">PK  route_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr">    route_name</text><text x="188" y="70" text-anchor="end" class="type">VARCHAR(100)</text>
+    <text x="12" y="92" class="attr">    start_point</text><text x="188" y="92" text-anchor="end" class="type">VARCHAR(100)</text>
+    <text x="12" y="114" class="attr">    destination</text><text x="188" y="114" text-anchor="end" class="type">VARCHAR(100)</text>
+    <text x="12" y="136" class="attr">    arrival_time</text><text x="188" y="136" text-anchor="end" class="type">TIME</text>
+  </g>
+
+  <!-- 3. STOP -->
+  <g transform="translate(680, 100)" filter="url(#shadow)">
+    <rect width="180" height="95" class="card"/>
+    <rect width="180" height="28" rx="8" class="header-transit"/>
+    <rect width="180" height="10" y="18" fill="#0f766e"/>
+    <text x="90" y="19" text-anchor="middle" class="title">STOP</text>
+    <text x="12" y="50" class="attr pk">PK  stop_id</text><text x="168" y="50" text-anchor="end" class="type">INT</text>
+    <text x="12" y="74" class="attr uk">UK  stop_name</text><text x="168" y="74" text-anchor="end" class="type">VARCHAR(100)</text>
+  </g>
+
+  <!-- 4. ROUTE_SEQUENCE (Bridge) -->
+  <g transform="translate(520, 310)" filter="url(#shadow)">
+    <rect width="210" height="125" class="card"/>
+    <rect width="210" height="28" rx="8" class="header-transit"/>
+    <rect width="210" height="10" y="18" fill="#0f766e"/>
+    <text x="105" y="19" text-anchor="middle" class="title">ROUTE_SEQUENCE</text>
+    <text x="12" y="48" class="attr pk fk">PK,FK route_id</text><text x="198" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr pk fk">PK,FK stop_id</text><text x="198" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr">      stop_order</text><text x="198" y="92" text-anchor="end" class="type">INT</text>
+    <text x="12" y="114" class="attr">      scheduled_time</text><text x="198" y="114" text-anchor="end" class="type">TIME</text>
+  </g>
+
+  <!-- 5. DRIVER -->
+  <g transform="translate(50, 310)" filter="url(#shadow)">
+    <rect width="200" height="130" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-ops"/>
+    <rect width="200" height="10" y="18" fill="#475569"/>
+    <text x="100" y="19" text-anchor="middle" class="title">DRIVER</text>
+    <text x="12" y="48" class="attr pk">PK  driver_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr">    driver_name</text><text x="188" y="70" text-anchor="end" class="type">VARCHAR(100)</text>
+    <text x="12" y="92" class="attr uk">UK  license_no</text><text x="188" y="92" text-anchor="end" class="type">VARCHAR(30)</text>
+    <text x="12" y="114" class="attr">    license_expiry</text><text x="188" y="114" text-anchor="end" class="type">DATE</text>
+  </g>
+
+  <!-- 6. ATTENDANT -->
+  <g transform="translate(50, 490)" filter="url(#shadow)">
+    <rect width="200" height="95" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-ops"/>
+    <rect width="200" height="10" y="18" fill="#475569"/>
+    <text x="100" y="19" text-anchor="middle" class="title">ATTENDANT</text>
+    <text x="12" y="50" class="attr pk">PK  attendant_id</text><text x="188" y="50" text-anchor="end" class="type">INT</text>
+    <text x="12" y="74" class="attr">    attendant_name</text><text x="188" y="74" text-anchor="end" class="type">VARCHAR(100)</text>
+  </g>
+
+  <!-- 7. BUS_ASSIGNMENT -->
+  <g transform="translate(280, 460)" filter="url(#shadow)">
+    <rect width="200" height="165" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-core"/>
+    <rect width="200" height="10" y="18" fill="#1e40af"/>
+    <text x="100" y="19" text-anchor="middle" class="title">BUS_ASSIGNMENT</text>
+    <text x="12" y="48" class="attr pk">PK  assignment_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr fk">FK  bus_id</text><text x="188" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr fk">FK  route_id</text><text x="188" y="92" text-anchor="end" class="type">INT</text>
+    <text x="12" y="114" class="attr fk">FK  driver_id</text><text x="188" y="114" text-anchor="end" class="type">INT</text>
+    <text x="12" y="136" class="attr fk">FK  attendant_id</text><text x="188" y="136" text-anchor="end" class="type">INT</text>
+    <text x="12" y="156" class="attr">    status</text><text x="188" y="156" text-anchor="end" class="type">ENUM</text>
+  </g>
+
+  <!-- 8. STUDENT -->
+  <g transform="translate(950, 100)" filter="url(#shadow)">
+    <rect width="200" height="130" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-core"/>
+    <rect width="200" height="10" y="18" fill="#1e40af"/>
+    <text x="100" y="19" text-anchor="middle" class="title">STUDENT</text>
+    <text x="12" y="48" class="attr pk">PK  student_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr">    student_name</text><text x="188" y="70" text-anchor="end" class="type">VARCHAR(100)</text>
+    <text x="12" y="92" class="attr">    grade</text><text x="188" y="92" text-anchor="end" class="type">VARCHAR(10)</text>
+    <text x="12" y="114" class="attr">    parent_contact</text><text x="188" y="114" text-anchor="end" class="type">VARCHAR(20)</text>
+  </g>
+
+  <!-- 9. TRANSPORT_REGISTRATION -->
+  <g transform="translate(850, 310)" filter="url(#shadow)">
+    <rect width="220" height="165" class="card"/>
+    <rect width="220" height="28" rx="8" class="header-transit"/>
+    <rect width="220" height="10" y="18" fill="#0f766e"/>
+    <text x="110" y="19" text-anchor="middle" class="title">TRANSPORT_REGISTRATION</text>
+    <text x="12" y="48" class="attr pk">PK  registration_id</text><text x="208" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr fk">FK  student_id</text><text x="208" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr fk">FK  route_id</text><text x="208" y="92" text-anchor="end" class="type">INT</text>
+    <text x="12" y="114" class="attr fk">FK  stop_id</text><text x="208" y="114" text-anchor="end" class="type">INT</text>
+    <text x="12" y="136" class="attr">    status</text><text x="208" y="136" text-anchor="end" class="type">ENUM</text>
+    <text x="12" y="156" class="attr">    start_date</text><text x="208" y="156" text-anchor="end" class="type">DATE</text>
+  </g>
+
+  <!-- 10. FEE_PLAN -->
+  <g transform="translate(600, 680)" filter="url(#shadow)">
+    <rect width="190" height="130" class="card"/>
+    <rect width="190" height="28" rx="8" class="header-finance"/>
+    <rect width="190" height="10" y="18" fill="#854d0e"/>
+    <text x="95" y="19" text-anchor="middle" class="title">FEE_PLAN</text>
+    <text x="12" y="48" class="attr pk">PK  plan_id</text><text x="178" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr">    plan_name</text><text x="178" y="70" text-anchor="end" class="type">VARCHAR(50)</text>
+    <text x="12" y="92" class="attr">    amount</text><text x="178" y="92" text-anchor="end" class="type">DECIMAL</text>
+    <text x="12" y="114" class="attr">    billing_cycle</text><text x="178" y="114" text-anchor="end" class="type">ENUM</text>
+  </g>
+
+  <!-- 11. PAYMENT -->
+  <g transform="translate(860, 670)" filter="url(#shadow)">
+    <rect width="210" height="145" class="card"/>
+    <rect width="210" height="28" rx="8" class="header-finance"/>
+    <rect width="210" height="10" y="18" fill="#854d0e"/>
+    <text x="105" y="19" text-anchor="middle" class="title">PAYMENT</text>
+    <text x="12" y="48" class="attr pk">PK  payment_id</text><text x="198" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr fk">FK  registration_id</text><text x="198" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr fk">FK  plan_id</text><text x="198" y="92" text-anchor="end" class="type">INT</text>
+    <text x="12" y="114" class="attr">    amount_paid</text><text x="198" y="114" text-anchor="end" class="type">DECIMAL</text>
+    <text x="12" y="136" class="attr">    payment_date</text><text x="198" y="136" text-anchor="end" class="type">DATE</text>
+  </g>
+
+  <!-- 12. PICKUP_LOG -->
+  <g transform="translate(860, 500)" filter="url(#shadow)">
+    <rect width="210" height="145" class="card"/>
+    <rect width="210" height="28" rx="8" class="header-transit"/>
+    <rect width="210" height="10" y="18" fill="#0f766e"/>
+    <text x="105" y="19" text-anchor="middle" class="title">PICKUP_LOG</text>
+    <text x="12" y="48" class="attr pk">PK  log_id</text><text x="198" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr fk">FK  registration_id</text><text x="198" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr">    trip_date</text><text x="198" y="92" text-anchor="end" class="type">DATE</text>
+    <text x="12" y="114" class="attr">    boarding_time</text><text x="198" y="114" text-anchor="end" class="type">TIME</text>
+    <text x="12" y="136" class="attr">    status</text><text x="198" y="136" text-anchor="end" class="type">ENUM</text>
+  </g>
+
+  <!-- 13. MAINTENANCE_RECORD -->
+  <g transform="translate(50, 680)" filter="url(#shadow)">
+    <rect width="200" height="140" class="card"/>
+    <rect width="200" height="28" rx="8" class="header-core"/>
+    <rect width="200" height="10" y="18" fill="#1e40af"/>
+    <text x="100" y="19" text-anchor="middle" class="title">MAINTENANCE_RECORD</text>
+    <text x="12" y="48" class="attr pk">PK  record_id</text><text x="188" y="48" text-anchor="end" class="type">INT</text>
+    <text x="12" y="70" class="attr fk">FK  bus_id</text><text x="188" y="70" text-anchor="end" class="type">INT</text>
+    <text x="12" y="92" class="attr">    service_date</text><text x="188" y="92" text-anchor="end" class="type">DATE</text>
+    <text x="12" y="114" class="attr">    cost</text><text x="188" y="114" text-anchor="end" class="type">DECIMAL</text>
+    <text x="12" y="136" class="attr">    description</text><text x="188" y="136" text-anchor="end" class="type">TEXT</text>
+  </g>
+
+  <!-- Connectors & Relationships -->
+  <!-- BUS -> BUS_ASSIGNMENT -->
+  <path d="M 150 250 L 150 460 L 280 490" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="155" y="380" class="rel-text">1:N</text>
+
+  <!-- ROUTE -> BUS_ASSIGNMENT -->
+  <path d="M 440 250 L 440 460" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="445" y="360" class="rel-text">1:N</text>
+
+  <!-- DRIVER -> BUS_ASSIGNMENT -->
+  <path d="M 250 375 L 280 480" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="260" y="420" class="rel-text">1:N</text>
+
+  <!-- ATTENDANT -> BUS_ASSIGNMENT -->
+  <path d="M 250 537 L 280 537" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="255" y="530" class="rel-text">1:N</text>
+
+  <!-- BUS -> MAINTENANCE_RECORD -->
+  <path d="M 100 250 L 100 680" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="105" y="650" class="rel-text">1:N</text>
+
+  <!-- ROUTE -> ROUTE_SEQUENCE -->
+  <path d="M 540 250 L 580 310" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="565" y="280" class="rel-text">1:N</text>
+
+  <!-- STOP -> ROUTE_SEQUENCE -->
+  <path d="M 720 195 L 680 310" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="705" y="260" class="rel-text">1:N</text>
+
+  <!-- STUDENT -> TRANSPORT_REGISTRATION -->
+  <path d="M 1020 230 L 980 310" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="1005" y="270" class="rel-text">1:N</text>
+
+  <!-- ROUTE_SEQUENCE -> TRANSPORT_REGISTRATION -->
+  <path d="M 730 380 L 850 380" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="770" y="375" class="rel-text">Composite FK</text>
+
+  <!-- TRANSPORT_REGISTRATION -> PICKUP_LOG -->
+  <path d="M 960 475 L 960 500" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="965" y="490" class="rel-text">1:N</text>
+
+  <!-- TRANSPORT_REGISTRATION -> PAYMENT -->
+  <path d="M 1000 475 L 1000 670" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="1005" y="660" class="rel-text">1:N</text>
+
+  <!-- FEE_PLAN -> PAYMENT -->
+  <path d="M 790 740 L 860 740" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="815" y="735" class="rel-text">1:N</text>
+</svg>
