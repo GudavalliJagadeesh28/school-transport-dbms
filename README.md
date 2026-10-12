@@ -8,7 +8,7 @@
 > ### 🎓 Student & Academic Project Information
 > | Field | Details |
 > | :--- | :--- |
-> | **Student Name** | **Gudavalli Jagadeesh )** |
+> | **Student Name** | **Gudavalli Jagadeesh ** |
 > | **Roll Number** | **25WU0102090** |
 > | **Section / Cohort** | **AIML Rhinos** (AI & Machine Learning) |
 > | **Course** | **Database Management Systems (DBMS / DBMS PBL)** |
