@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% from "_macros.html" import head, bar %}{% block body %}
+{{ head("Transport overview", today.strftime("%A, %d %B %Y")) }}
+<div class="grid k4">
+ <div class="card kpi hot"><b>{{ kpi.students }}</b><span>Students on transport</span></div>
+ <div class="card kpi"><b>{{ kpi.seats }}</b><span>Open seats on active routes</span></div>
+ <div class="card kpi"><b>{{ kpi.picked }} / {{ kpi.absent }}</b><span>Picked up today / absent</span></div>
+ <div class="card kpi"><b>{{ kpi.dues|inr }}</b><span>Fees outstanding</span></div>
+</div>
+<div class="grid c2" style="margin-top:16px">
+ <div class="card"><h2>Seat utilization by route</h2>
+  {% for u in util %}<div style="margin-bottom:16px"><div class="row"><b>{{ u.Route_Name }}</b><span class="mono">{% if u.Capacity %}{{ u.Enrolled }} of {{ u.Capacity }} seats{% else %}No bus assigned{% endif %}</span></div>{% if u.Capacity %}{{ bar(u.Enrolled,u.Capacity) }}{% endif %}</div>{% endfor %}</div>
+ <div class="card"><h2>Driver licenses needing attention</h2>
+  {% if lic %}<div class="tw"><table><thead><tr><th>Driver</th><th>Licence expiry</th><th>Status</th></tr></thead><tbody>
+  {% for d in lic %}<tr><td>{{ d.Name }}</td><td>{{ d.License_Expiry }}</td><td>{% if d.expired %}<span class="pill p-bad">Expired</span>{% else %}<span class="pill p-warn">Expires soon</span>{% endif %}</td></tr>{% endfor %}
+  </tbody></table></div>{% else %}<div class="empty">All licenses are valid for at least 90 days.</div>{% endif %}</div>
+</div>{% endblock %}

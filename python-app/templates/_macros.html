@@ -1,0 +1,3 @@
+{% macro status(s) %}{% set m={'PICKED_UP':'ok','LATE':'warn','ABSENT':'bad','ACTIVE':'ok','ENDED':'n','INACTIVE':'n','MAINTENANCE':'warn'} %}<span class="pill p-{{ m.get(s,'n') }}">{{ s|replace('_',' ')|capitalize }}</span>{% endmacro %}
+{% macro head(t,s) %}<h1>{{ t }}</h1><p class="sub">{{ s }}</p>{% endmacro %}
+{% macro bar(n,m) %}{% set p=(n/m*100)|round|int if m else 0 %}<div class="bar"><i class="{{ 'full' if m and n>=m else 'near' if p>=75 }}" style="width:{{ [p,100]|min }}%"></i></div>{% endmacro %}

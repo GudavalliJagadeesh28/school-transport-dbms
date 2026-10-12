@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% from "_macros.html" import head %}{% block body %}
+{{ head("Fees and payments","Record a payment against a registration and a fee plan. Balances come from the V_FEE_STATUS view.") }}
+<div class="card"><h2>Record a payment</h2><form method="post" action="{{ url_for('payment_add') }}" class="form">
+ <div><label>Student</label><select name="reg">{% for r in regs %}<option value="{{ r.Registration_ID }}">{{ r.Name }}</option>{% endfor %}</select></div>
+ <div><label>Fee plan</label><select name="plan">{% for p in plans %}<option value="{{ p.Plan_ID }}">{{ p.Plan_Name }} · {{ p.Amount|inr }}</option>{% endfor %}</select></div>
+ <div><label>Amount paid (₹)</label><input name="amount" type="number" min="1" step="0.01" value="1500" required></div>
+ <div><label>Date</label><input name="date" type="date" value="{{ today }}" required></div><button class="btn am">Save payment</button></form></div>
+<div class="card"><div class="tw"><table><thead><tr><th>Student</th><th>Route</th><th>Plan</th><th>Paid</th><th>Balance</th></tr></thead><tbody>
+{% for d in dues %}<tr><td>{{ d.Student }}</td><td>{{ d.Route_Name }}</td><td>{{ d.Plan_Name }} · {{ d.Plan_Amount|inr }}</td><td>{{ d.Paid|inr }}</td>
+<td>{% if d.Due>0 %}<span class="pill p-bad">{{ d.Due|inr }} due</span>{% else %}<span class="pill p-ok">Paid</span>{% endif %}</td></tr>{% endfor %}
+</tbody></table></div></div>{% endblock %}

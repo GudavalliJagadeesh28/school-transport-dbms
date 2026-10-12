@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% from "_macros.html" import head %}{% block body %}
+{{ head("Reports","The four reports from the functional requirements, each a SQL query on the live database.") }}
+<div class="grid c2">
+ <div class="card"><h2>Capacity utilization</h2><div class="tw"><table><thead><tr><th>Route</th><th>Bus</th><th>Capacity</th><th>Enrolled</th><th>Used</th></tr></thead><tbody>
+ {% for u in util %}<tr><td>{{ u.Route_Name }}</td><td>{{ u.Registration_Num }}</td><td>{{ u.Capacity }}</td><td>{{ u.Enrolled }}</td><td>{{ (u.Enrolled/u.Capacity*100)|round|int }}%</td></tr>{% endfor %}</tbody></table></div></div>
+ <div class="card"><h2>Unpaid fees</h2>{% if unpaid %}<div class="tw"><table><thead><tr><th>Student</th><th>Route</th><th>Paid</th><th>Due</th></tr></thead><tbody>
+ {% for u in unpaid %}<tr><td>{{ u.Student }}</td><td>{{ u.Route_Name }}</td><td>{{ u.Paid|inr }} of {{ u.Plan_Amount|inr }}</td><td><span class="pill p-bad">{{ u.Due|inr }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">No dues.</div>{% endif %}</div>
+ <div class="card"><h2>Driver assignments</h2><div class="tw"><table><thead><tr><th>Route</th><th>Driver</th><th>Attendant</th><th>Bus</th></tr></thead><tbody>
+ {% for a in asg %}<tr><td>{{ a.Route_Name }}</td><td>{{ a.Driver }}</td><td>{{ a.Attendant }}</td><td>{{ a.Registration_Num }}</td></tr>{% endfor %}</tbody></table></div></div>
+ <div class="card"><div class="row" style="margin-bottom:8px"><h2 style="margin:0">Absent students</h2>
+  <form method="get"><input type="date" name="d" value="{{ d }}" onchange="this.form.submit()" aria-label="Date" style="width:auto"></form></div>
+  {% if absent %}<div class="tw"><table><thead><tr><th>Student</th><th>Route</th><th>Stop</th></tr></thead><tbody>
+  {% for a in absent %}<tr><td>{{ a.Name }}</td><td>{{ a.Route_Name }}</td><td>{{ a.Stop_Name }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">No absences logged on {{ d }}.</div>{% endif %}</div>
+</div>{% endblock %}

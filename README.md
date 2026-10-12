@@ -559,6 +559,9 @@ You can deploy this prototype live on GitHub Pages:
 ```text
 school-transport-dbms/
 ├── .gitignore                                 # Git configuration file ignoring temporary files
+├── .nojekyll                                  # Enables direct static asset serving on GitHub Pages
+├── netlify.toml                               # One-click Netlify deployment configuration
+├── DEPLOYMENT.md                              # Complete deployment guide (Docker, Python/Flask, Netlify, Cloud)
 ├── README.md                                  # Full project documentation, ER diagrams, 3NF schemas, and student info
 ├── DATA_DICTIONARY.md                         # Exhaustive tabular data dictionary and seed data records
 ├── database_schema.sql                        # Executable MySQL DDL schema, triggers, inserts, and analytical queries
@@ -569,7 +572,30 @@ school-transport-dbms/
 ├── styles.css                                 # Extracted CSS styles (theme variables, layout, responsive design)
 ├── School_Transport_DBMS_Review1.pptx         # Review 1 Presentation Slides (Conceptual design & ER modeling)
 ├── School_Transport_DBMS_Review2.pptx         # Review 2 Presentation Slides (3NF normalization & SQL schema)
-└── School_Transport_DBMS_Review3.pptx         # Review 3 Presentation Slides (Prototype implementation & testing)
+├── School_Transport_DBMS_Review3.pptx         # Review 3 Presentation Slides (Prototype implementation & testing)
+└── python-app/                                # Full-stack Python Flask + MySQL backend implementation
+    ├── app.py                                 # Flask backend controller with parameterized SQL & triggers
+    ├── schema.sql                             # 13-table MySQL database schema with triggers & analytical views
+    ├── requirements.txt                       # Python dependencies (Flask, PyMySQL, cryptography, gunicorn)
+    ├── Dockerfile                             # Containerization definition for Python application
+    ├── docker-compose.yml                     # Multi-container orchestration (Flask app + MySQL 8.0)
+    ├── Procfile                               # Production deployment configuration (Render, Railway, Heroku)
+    ├── .env.example                           # Environment configuration template
+    ├── README.md                              # Python Flask backend documentation
+    └── templates/                             # Jinja2 presentation templates
+        ├── base.html                          # Master layout and styling
+        ├── _macros.html                       # Reusable UI macros
+        ├── dashboard.html                     # Administrative metrics and KPI dashboard
+        ├── routes.html                        # Route planning and stop sequence builder
+        ├── assignments.html                   # Bus, driver, attendant allocation
+        ├── registrations.html                 # Student subscription manager
+        ├── pickup.html                        # Driver daily attendance checklist
+        ├── fees.html                          # Billing and fee payment ledger
+        ├── maintenance.html                   # Fleet maintenance and service logs
+        ├── reports.html                       # Analytical query reports
+        ├── data.html                          # Master data catalog
+        ├── parent.html                        # Parent tracking portal
+        └── tests.html                         # Interactive database trigger & constraint tests
 ```
 
 ---

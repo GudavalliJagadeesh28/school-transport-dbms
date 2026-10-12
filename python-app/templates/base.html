@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ school }} · Transport</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#14213d;--mut:#5d6b85;--line:#e1e6ef;--navy:#14213d;--navy2:#1f3160;--amber:#f5b301;--ok:#14804a;--okb:#e3f5ec;--bad:#c0392b;--badb:#fdeceb;--warn:#8a5a00;--warnb:#fff3d1;--blue:#2457c5}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1424;--card:#172038;--ink:#e8edf8;--mut:#98a5c0;--line:#2a3555;--navy:#0a1020;--navy2:#22305a;--okb:#12382a;--badb:#3d1c1a;--warnb:#3d3013;--ok:#4cc38a;--bad:#ff8a7a;--warn:#f5c04a;--blue:#7fa6ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#e8edf8;padding:20px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 18px;font-weight:700;line-height:1.2}.brand small{display:block;font-weight:400;color:#9fb0d6;font-size:12px}
+.logo{width:38px;height:38px;border-radius:10px;background:var(--amber);display:grid;place-items:center;flex:none;font-size:20px}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--navy2);padding:4px;border-radius:10px;margin:0 4px 16px}
+.roles a{text-align:center;color:#c5d0ea;padding:7px 2px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none}.roles a.on{background:var(--amber);color:#14213d}
+nav a{display:block;color:#c5d0ea;padding:9px 12px;border-radius:8px;text-decoration:none;font-weight:500}nav a:hover{background:var(--navy2)}nav a.on{background:var(--navy2);color:#fff;box-shadow:inset 3px 0 var(--amber)}
+.foot{margin:18px 8px 0;font-size:12px;color:#9fb0d6}
+main{padding:28px 32px 48px;max-width:1180px;width:100%}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}h2{font-size:17px;margin:0 0 12px}.sub{color:var(--mut);margin:0 0 22px}
+.grid{display:grid;gap:16px}.k4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0;margin-bottom:16px}.grid .card{margin-bottom:0}
+.kpi b{display:block;font-size:30px;line-height:1.1}.kpi span{color:var(--mut);font-size:13px}.kpi.hot{background:var(--navy);color:#fff;border-color:var(--navy)}.kpi.hot span{color:#b8c4e3}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;color:var(--mut);font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okb);color:var(--ok)}.p-bad{background:var(--badb);color:var(--bad)}.p-warn{background:var(--warnb);color:var(--warn)}.p-n{background:var(--line);color:var(--mut)}
+.bar{height:9px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--blue)}.bar i.full{background:var(--bad)}.bar i.near{background:var(--amber)}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:4px}
+select,input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+td input,td select{min-width:110px}select:focus,input:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.btn{border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--navy);color:#fff}
+.btn.am{background:var(--amber);color:#14213d}.btn.sm{padding:5px 11px;font-size:13px}.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}.btn.red{color:var(--bad)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 11px;cursor:pointer;font:inherit;font-weight:600;font-size:13px}
+.seg .a:hover{background:var(--okb);color:var(--ok)}.seg .l:hover{background:var(--warnb);color:var(--warn)}.seg .x:hover{background:var(--badb);color:var(--bad)}
+.tl{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--line)}.tl li{position:relative;padding:0 0 14px 14px}
+.tl li:before{content:"";position:absolute;left:-26px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
+.tl li.me:before{background:var(--amber);border-color:var(--amber)}.tl small,.mono{color:var(--mut)}.mono{font-size:12.5px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.tabs a{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 14px;font-weight:600;color:var(--ink);text-decoration:none}.tabs a.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.title-in{font-weight:700;font-size:17px}.empty{color:var(--mut);padding:12px 0}
+.flash{padding:11px 16px;border-radius:10px;font-weight:600;margin-bottom:16px}.flash.ok{background:var(--okb);color:var(--ok)}.flash.err{background:var(--badb);color:var(--bad)}
+@media(max-width:820px){.app{grid-template-columns:1fr}aside{position:static;height:auto;padding:12px}nav{display:flex;overflow-x:auto;gap:4px}nav a{white-space:nowrap}.foot,.brand small{display:none}main{padding:18px 14px 40px}}
+</style></head>
+<body><div class="app">
+<aside>
+ <div class="brand"><div class="logo">🚌</div><div>{{ school }}<small>Transport Management</small></div></div>
+ <div class="roles">{% for r,l in [('admin','Admin'),('driver','Driver'),('parent','Parent')] %}<a href="{{ url_for('set_role', r=r) }}" class="{{ 'on' if r==role }}">{{ l }}</a>{% endfor %}</div>
+ <nav>{% for ep,label in nav %}<a href="{{ url_for(ep) }}" class="{{ 'on' if endpoint==ep or (ep=='data_page' and endpoint=='data_page') }}">{{ label }}</a>{% endfor %}</nav>
+ <div class="foot">Python + MySQL. Business rules are enforced by database constraints and triggers.</div>
+</aside>
+<main>
+{% with m = get_flashed_messages(with_categories=true) %}{% for c,t in m %}<div class="flash {{ c }}" role="status">{{ t }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}
+</main></div></body></html>

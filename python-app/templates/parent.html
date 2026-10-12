@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% from "_macros.html" import head, status %}{% block body %}
+{{ head("My child's transport","Read-only view of route, pickup and fees.") }}
+<form method="get" style="max-width:300px;margin-bottom:18px"><label>Child</label><select name="reg" onchange="this.form.submit()">{% for k in kids %}<option value="{{ k.Registration_ID }}" {{ 'selected' if me and k.Registration_ID==rid }}>{{ k.Name }}</option>{% endfor %}</select></form>
+{% if not me %}<div class="card empty">No active transport registration found.</div>{% else %}
+<div class="grid k4">
+ <div class="card kpi hot"><b>{% for s in stops %}{% if s.Stop_ID==me.Stop_ID %}{{ s.Estimated_Time|hm }}{% endif %}{% endfor %}</b><span>Pickup time</span></div>
+ <div class="card kpi"><b>{% if today_log %}{{ status(today_log.Status) }}{% else %}<span class="pill p-n">Not yet</span>{% endif %}</b><span>Today's status</span></div>
+ <div class="card kpi"><b>{% if fee and fee.Due>0 %}{{ fee.Due|inr }}{% else %}Paid{% endif %}</b><span>{{ 'Balance due' if fee and fee.Due>0 else 'Fees up to date' }}</span></div></div>
+<div class="grid c2" style="margin-top:16px">
+ <div class="card"><h2>{{ me.Route_Name }} route</h2><ul class="tl">{% for s in stops %}<li class="{{ 'me' if s.Stop_ID==me.Stop_ID }}"><b>{{ s.Stop_Name }}</b>{% if s.Stop_ID==me.Stop_ID %} <span class="pill p-warn">Your stop</span>{% endif %}<br><small>{{ s.Estimated_Time|hm }}</small></li>{% endfor %}</ul>
+  {% if crew %}<div class="mono">Bus {{ crew.Registration_Num }} · Driver {{ crew.Driver }}</div>{% endif %}</div>
+ <div class="card"><h2>Payment history</h2>{% if pays %}<div class="tw"><table><thead><tr><th>Date</th><th>Plan</th><th>Amount</th></tr></thead><tbody>
+ {% for p in pays %}<tr><td>{{ p.Payment_Date }}</td><td>{{ p.Plan_Name }}</td><td>{{ p.Amount_Paid|inr }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">No payments recorded yet.</div>{% endif %}
+ <div class="mono" style="margin-top:10px">{{ me.Name }} · Grade {{ me.Grade }} · Parent contact {{ me.Parent_Contact }}</div></div></div>{% endif %}{% endblock %}

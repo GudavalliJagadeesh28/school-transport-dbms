@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% from "_macros.html" import head %}{% block body %}
+{{ head("Rule tests","Each business rule is attempted with bad input against the real database, then rolled back. All five should be rejected.") }}
+<div class="card"><div class="row" style="margin-bottom:10px"><h2 style="margin:0">Constraint test cases</h2><a class="btn am" href="{{ url_for('tests') }}" style="text-decoration:none">Run all tests again</a></div>
+<div class="tw"><table><thead><tr><th>Test case</th><th>Action</th><th>Result</th></tr></thead><tbody>
+{% for t in results %}<tr><td><b>{{ t.name }}</b></td><td>{{ t.action }}</td><td>{% if t.ok %}<span class="pill p-ok">Rejected as expected</span>{% else %}<span class="pill p-bad">Not rejected</span>{% endif %}<div class="mono">{{ t.msg }}</div></td></tr>{% endfor %}
+</tbody></table></div></div>{% endblock %}

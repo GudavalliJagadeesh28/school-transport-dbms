@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% from "_macros.html" import head %}{% block body %}
+{{ head("Master data","Edit any name or value directly in the table, then press Save on that row. The database validates every change.") }}
+<div class="tabs">{% for k,e in ent.items() %}<a href="{{ url_for('data_page', key=k) }}" class="{{ 'on' if k==key }}">{{ e[2] }}</a>{% endfor %}</div>
+{% macro field(c,v,form) %}{% if c[2] is string %}<input type="{{ c[2] }}" name="{{ c[0] }}" value="{{ v if v is not none else '' }}" form="{{ form }}" aria-label="{{ c[1] }}" {{ 'step=0.01 min=0' if c[2]=='number' }}>
+{% else %}<select name="{{ c[0] }}" form="{{ form }}" aria-label="{{ c[1] }}">{% for o in c[2] %}<option{{ ' selected' if o==v }}>{{ o }}</option>{% endfor %}</select>{% endif %}{% endmacro %}
+<div class="card"><h2>Add {{ single }}</h2><form id="fadd" method="post" action="{{ url_for('data_add', key=key) }}" class="form">
+ {% for c in cols %}<div><label>{{ c[1] }}</label>{{ field(c,'','fadd') }}</div>{% endfor %}<button class="btn am">Add {{ single }}</button></form></div>
+<div class="card"><h2>{{ title }}</h2><div class="tw"><table><thead><tr>{% for c in cols %}<th>{{ c[1] }}</th>{% endfor %}<th></th></tr></thead><tbody>
+{% for r in rows %}{% set f='f'~r[pk] %}<tr>{% for c in cols %}<td>{{ field(c,r[c[0]],f) }}</td>{% endfor %}
+<td><form id="{{ f }}" method="post" class="seg"><button formaction="{{ url_for('data_save', key=key, rid=r[pk]) }}">Save</button>
+<button class="x" formaction="{{ url_for('data_delete', key=key, rid=r[pk]) }}">Delete</button></form></td></tr>{% endfor %}
+</tbody></table></div></div>{% endblock %}

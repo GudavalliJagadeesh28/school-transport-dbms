@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% from "_macros.html" import head %}{% block body %}
+{{ head("Routes and stops","Reorder stops, change pickup times, and add or remove stops. Create or rename routes and stops under Master data.") }}
+<div class="grid c2">{% for r in routes %}
+<div class="card"><div class="row"><h2 style="margin:0">{{ r.Route_Name }}</h2>{% if r.bus %}<span class="pill p-n">{{ r.bus.Registration_Num }}</span>{% else %}<span class="pill p-warn">No bus</span>{% endif %}</div>
+ <p class="mono" style="margin:4px 0 10px">{{ r.Start_Point }} to {{ r.End_Point }}</p>
+ {% if r.stops %}<div class="tw"><table><thead><tr><th>#</th><th>Stop</th><th>Time</th><th>Kids</th><th></th></tr></thead><tbody>
+ {% for s in r.stops %}<tr><td>{{ loop.index }}</td><td>{{ s.Stop_Name }}</td>
+  <td><input type="time" name="time" form="f{{ s.Sequence_ID }}" value="{{ s.Estimated_Time|hm }}" aria-label="Time"></td><td>{{ s.students }}</td>
+  <td><form id="f{{ s.Sequence_ID }}" method="post" class="seg">
+   <button formaction="{{ url_for('route_stop_edit', sid=s.Sequence_ID, action='time') }}">Save time</button>
+   <button formaction="{{ url_for('route_stop_edit', sid=s.Sequence_ID, action='up') }}" aria-label="Move up">↑</button>
+   <button formaction="{{ url_for('route_stop_edit', sid=s.Sequence_ID, action='down') }}" aria-label="Move down">↓</button>
+   <button class="x" formaction="{{ url_for('route_stop_edit', sid=s.Sequence_ID, action='remove') }}">Remove</button></form></td></tr>{% endfor %}
+ </tbody></table></div>{% else %}<div class="empty">No stops yet. Add the first stop below.</div>{% endif %}
+ <form method="post" action="{{ url_for('route_stop_add', rid=r.Route_ID) }}" class="form" style="margin-top:12px">
+  <div><label>Stop to add</label><select name="stop">{% for s in stops %}<option value="{{ s.Stop_ID }}">{{ s.Stop_Name }}</option>{% endfor %}</select></div>
+  <div><label>Time</label><input type="time" name="time" value="07:45" required></div><button class="btn am sm">Add stop</button></form>
+</div>{% endfor %}</div>{% endblock %}

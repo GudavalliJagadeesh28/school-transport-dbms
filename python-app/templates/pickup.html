@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% from "_macros.html" import head, status %}{% block body %}
+{{ head("Daily pickup", (asg.Route_Name ~ " · " ~ asg.Registration_Num) if asg else "Mark each student as picked up, late or absent.") }}
+<form method="get" style="max-width:300px;margin-bottom:18px"><label>Signed in as</label><select name="driver" onchange="this.form.submit()">{% for d in drivers %}<option value="{{ d.Driver_ID }}" {{ 'selected' if d.Driver_ID==did }}>{{ d.Name }}</option>{% endfor %}</select></form>
+{% if not asg %}<div class="card empty">This driver has no active route. Ask the transport admin for an assignment.</div>{% endif %}
+{% for s in stops %}<div class="card"><div class="row"><b>{{ s.name }}</b><span class="mono">{{ s.time|hm }}</span></div>
+<div class="tw"><table><thead><tr><th>Student</th><th>Today</th><th></th></tr></thead><tbody>
+{% for k in s.kids %}<tr><td>{{ k.Name }} <span class="mono">Grade {{ k.Grade }}</span></td>
+<td>{% if k.Status %}{{ status(k.Status) }} <span class="mono">{{ k.Pickup_Time|hm }}</span>{% else %}<span class="pill p-n">Not marked</span>{% endif %}</td>
+<td><form method="post" action="{{ url_for('pickup_mark') }}" class="seg"><input type="hidden" name="reg" value="{{ k.Registration_ID }}"><input type="hidden" name="driver" value="{{ did }}">
+<button class="a" name="status" value="PICKED_UP">Picked up</button><button class="l" name="status" value="LATE">Late</button><button class="x" name="status" value="ABSENT">Absent</button></form></td></tr>{% endfor %}
+</tbody></table></div></div>{% endfor %}{% endblock %}

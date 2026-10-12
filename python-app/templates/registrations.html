@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% from "_macros.html" import head, status %}{% block body %}
+{{ head("Student registration","Map each student to a route and a stop. The capacity trigger checks seats on the assigned bus.") }}
+<div class="card"><h2>Register a student</h2><form method="post" action="{{ url_for('registration_add') }}" class="form">
+ <div><label>Student</label><select name="student">{% for s in free %}<option value="{{ s.Student_ID }}">{{ s.Name }} · Grade {{ s.Grade }}</option>{% endfor %}</select></div>
+ <div><label>Route</label><select name="route" id="rt" onchange="filt()">{% for r in rts %}<option value="{{ r.Route_ID }}">{{ r.Route_Name }} ({{ r.Enrolled }}{% if r.Capacity %}/{{ r.Capacity }}{% endif %})</option>{% endfor %}</select></div>
+ <div><label>Stop</label><select name="stop" id="sp">{% for s in stops %}<option value="{{ s.Stop_ID }}" data-r=",{{ s.routes }},">{{ s.Stop_Name }}</option>{% endfor %}</select></div>
+ <button class="btn am">Register</button></form></div>
+<div class="card"><div class="tw"><table><thead><tr><th>Student</th><th>Grade</th><th>Route</th><th>Stop</th><th>Since</th><th>Status</th><th></th></tr></thead><tbody>
+{% for r in rows %}<tr><td>{{ r.Name }}</td><td>{{ r.Grade }}</td><td>{{ r.Route_Name }}</td><td>{{ r.Stop_Name }}</td><td>{{ r.Start_Date }}</td><td>{{ status(r.Status) }}</td>
+<td>{% if r.Status=='ACTIVE' %}<form method="post" action="{{ url_for('registration_off', rid=r.Registration_ID) }}"><button class="btn sm ghost">Deactivate</button></form>{% endif %}</td></tr>{% endfor %}
+</tbody></table></div></div>
+<script>function filt(){var r=document.getElementById('rt').value,s=document.getElementById('sp'),f=null;[].forEach.call(s.options,function(o){var ok=o.dataset.r.indexOf(','+r+',')>-1;o.hidden=!ok;o.disabled=!ok;if(ok&&!f)f=o});if(f&&s.selectedOptions[0].disabled)s.value=f.value}filt()</script>
+{% endblock %}
