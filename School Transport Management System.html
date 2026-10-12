@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>School Transport Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#14213d;--mut:#5d6b85;--line:#e1e6ef;--navy:#14213d;--navy2:#1f3160;--amber:#f5b301;--ok:#14804a;--okb:#e3f5ec;--bad:#c0392b;--badb:#fdeceb;--warn:#8a5a00;--warnb:#fff3d1;--blue:#2457c5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#172038;--ink:#e8edf8;--mut:#98a5c0;--line:#2a3555;--navy:#0a1020;--navy2:#22305a;--okb:#12382a;--badb:#3d1c1a;--warnb:#3d3013;--ok:#4cc38a;--bad:#ff8a7a;--warn:#f5c04a;--blue:#7fa6ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1424;--card:#172038;--ink:#e8edf8;--mut:#98a5c0;--line:#2a3555;--navy:#0a1020;--navy2:#22305a;--okb:#12382a;--badb:#3d1c1a;--warnb:#3d3013;--ok:#4cc38a;--bad:#ff8a7a;--warn:#f5c04a;--blue:#7fa6ff;color-scheme:dark}
+*{box-sizing:border-box}html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:15px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,select,input{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#e8edf8;padding:20px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 18px;font-weight:700;line-height:1.2}
+.brand small{display:block;font-weight:400;color:#9fb0d6;font-size:12px}
+.logo{width:38px;height:38px;border-radius:10px;background:var(--amber);display:grid;place-items:center;flex:none}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--navy2);padding:4px;border-radius:10px;margin:0 4px 16px}
+.roles button{border:0;background:none;color:#c5d0ea;padding:7px 2px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600}
+.roles button.on{background:var(--amber);color:#14213d}
+nav button{display:flex;width:100%;gap:10px;align-items:center;text-align:left;border:0;background:none;color:#c5d0ea;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:500}
+nav button:hover{background:var(--navy2)}nav button.on{background:var(--navy2);color:#fff;box-shadow:inset 3px 0 var(--amber)}
+.foot{margin:18px 8px 0;font-size:12px;color:#9fb0d6}
+main{padding:28px 32px 48px;max-width:1180px;width:100%}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}h2{font-size:17px;margin:0 0 12px}
+.sub{color:var(--mut);margin:0 0 22px}
+.grid{display:grid;gap:16px}.k4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.kpi b{display:block;font-size:30px;line-height:1.1;letter-spacing:-.02em}.kpi span{color:var(--mut);font-size:13px}
+.kpi.hot{background:var(--navy);color:#fff;border-color:var(--navy)}.kpi.hot span{color:#b8c4e3}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;color:var(--mut);font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okb);color:var(--ok)}.p-bad{background:var(--badb);color:var(--bad)}.p-warn{background:var(--warnb);color:var(--warn)}.p-n{background:var(--line);color:var(--mut)}
+.bar{height:9px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--blue);border-radius:9px}.bar i.full{background:var(--bad)}.bar i.near{background:var(--amber)}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:4px}
+select,input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+select:focus,input:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.btn{border:0;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer;background:var(--navy);color:#fff}
+.btn.am{background:var(--amber);color:#14213d}.btn.sm{padding:5px 11px;font-size:13px}.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
+.seg{display:flex;gap:6px}.seg button{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 11px;cursor:pointer;font-weight:600;font-size:13px}
+.seg .a:hover{background:var(--okb);color:var(--ok)}.seg .l:hover{background:var(--warnb);color:var(--warn)}.seg .x:hover{background:var(--badb);color:var(--bad)}
+.tl{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--line)}
+.tl li{position:relative;padding:0 0 16px 14px}.tl li:before{content:"";position:absolute;left:-26px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
+.tl li.me:before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 4px var(--warnb)}.tl small{color:var(--mut)}
+.tests td:first-child{font-weight:600}.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--mut)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.tabs button{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:600;color:var(--ink)}.tabs .on{background:var(--navy);color:#fff;border-color:var(--navy)}
+td input,td select{min-width:110px}.title-in{font-weight:700;font-size:17px;border-color:transparent;padding:4px 8px;background:transparent;width:auto;flex:1}.title-in:hover,.title-in:focus{border-color:var(--line);background:var(--card)}.seg .x{color:var(--bad)}
+#toast{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));max-width:380px;padding:12px 16px;border-radius:10px;font-weight:600;box-shadow:0 8px 28px rgba(0,0,0,.25);opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none;z-index:9}
+#toast.show{opacity:1;transform:none}#toast.ok{background:var(--ok);color:#fff}#toast.err{background:var(--bad);color:#fff}
+.empty{color:var(--mut);padding:14px 0}
+@media(max-width:820px){.app{grid-template-columns:1fr}aside{position:static;height:auto;padding:12px}nav{display:flex;overflow-x:auto;gap:4px}nav button{white-space:nowrap;width:auto}.foot,.brand small{display:none}.brand{padding-bottom:10px}main{padding:18px 14px 40px}.c2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14213d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 11h18M7 17v2M17 17v2"/><circle cx="7.5" cy="14" r=".6"/><circle cx="16.5" cy="14" r=".6"/></svg></div><div><span id="sname">School Transport</span><small>Transport Management</small></div></div>
+  <div class="roles" id="roles"></div>
+  <nav id="nav"></nav>
+  <div class="foot">Edits save automatically in this browser. Business rules run the way the MySQL triggers and constraints would.<br><button class="btn sm ghost" style="margin-top:10px;color:#c5d0ea;border-color:#3a4a78" onclick="resetAll()">Reset sample data</button></div>
+</aside>
+<main id="main"></main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const TODAY="2026-10-12";
+const DB={school:"Greenfield Public School",
+buses:[{id:1,reg:"TS-09-UA-1021",cap:8,model:"Tata Starbus",status:"ACTIVE"},{id:2,reg:"TS-09-UB-4410",cap:6,model:"Ashok Leyland Viking",status:"ACTIVE"},{id:3,reg:"TS-09-UC-7782",cap:10,model:"Eicher Skyline",status:"ACTIVE"},{id:4,reg:"TS-09-UD-3305",cap:8,model:"Tata Starbus",status:"ACTIVE"}],
+stops:{1:"Bus Stand",2:"Housing Colony",3:"Market Yard",4:"Temple Circle",5:"Lake View",6:"Clock Tower",7:"Railway Gate",8:"Hospital Road",9:"Garden Park",10:"Mill Junction",11:"Polytechnic Gate"},
+routes:[{id:1,name:"Green Valley",start:"Bus Stand",end:"School Campus",arr:"07:50",seq:[[1,"07:05"],[2,"07:15"],[3,"07:25"],[4,"07:35"]]},{id:2,name:"Lakeview",start:"Lake View",end:"School Campus",arr:"07:50",seq:[[5,"07:00"],[6,"07:12"],[7,"07:24"],[8,"07:36"]]},{id:3,name:"Old Town",start:"Garden Park",end:"School Campus",arr:"07:50",seq:[[9,"07:10"],[10,"07:22"],[11,"07:34"]]}],
+drivers:[{id:1,name:"Ramesh Kumar",lic:"TS0920110045",exp:"2027-03-14"},{id:2,name:"Suresh Reddy",lic:"TS0920090871",exp:"2026-12-01"},{id:3,name:"Anil Goud",lic:"TS0920080233",exp:"2026-05-10"},{id:4,name:"Kiran Rao",lic:"TS0920150619",exp:"2028-08-22"}],
+atts:[{id:1,name:"Lakshmi Devi"},{id:2,name:"Padma Rani"},{id:3,name:"Savitri Bai"},{id:4,name:"Radha Krishna"}],
+assigns:[{id:1,bus:1,route:1,drv:1,att:1,status:"ACTIVE"},{id:2,bus:2,route:2,drv:2,att:2,status:"ACTIVE"},{id:3,bus:3,route:3,drv:4,att:3,status:"ACTIVE"}],
+students:["Aarav Sharma|6","Diya Reddy|7","Vihaan Rao|5","Ananya Goud|8","Rohan Patel|9","Isha Nair|6","Kabir Singh|7","Meera Iyer|5","Arjun Das|8","Saanvi Gupta|10","Advik Verma|6","Myra Khan|9","Reyansh Joshi|7","Kiara Menon|8","Ishaan Yadav|5","Tara Bose|6","Dev Malhotra|9","Navya Pillai|7"].map((s,i)=>({id:i+1,name:s.split("|")[0],grade:s.split("|")[1],contact:"+91 98480 "+(10100+i*37)})),
+regs:[],plans:[{id:1,name:"Monthly",amt:1500,cycle:"Monthly"},{id:2,name:"Term",amt:4200,cycle:"Quarterly"}],
+pays:[],logs:[],maint:[{id:1,bus:2,date:"2026-09-18",cost:6400,desc:"Brake pad replacement"},{id:2,bus:1,date:"2026-08-30",cost:2200,desc:"Oil and filter service"},{id:3,bus:3,date:"2026-07-12",cost:9800,desc:"Clutch overhaul"}]};
+// seed registrations: R1 6/8, R2 6/6 (full), R3 3/10
+[[1,1],[2,1],[3,2],[4,3],[5,4],[6,1],[7,2],[8,2],[9,3],[10,3],[11,4],[12,1],[13,3],[14,1],[15,2]].forEach(([sid,stp],i)=>{const rid=sid<=6?1:sid<=12?2:3;const r=DB.routes[rid-1];const stop=r.seq[(sid+stp)%r.seq.length][0];DB.regs.push({id:i+1,sid,rid,stop,status:"ACTIVE",start:"2026-06-10"})});
+[[1,1,1500],[2,2,4200],[3,1,800],[4,1,1500],[7,2,4200],[8,1,1500],[9,1,1500],[13,1,1500]].forEach(([r,p,a],i)=>DB.pays.push({id:i+1,reg:r,plan:p,amt:a,date:"2026-10-0"+(i%5+1)}));
+[[1,"PICKED_UP","07:06"],[2,"LATE","07:21"],[3,"ABSENT",""],[6,"PICKED_UP","07:27"]].forEach(([r,s,t],i)=>DB.logs.push({id:i+1,reg:r,date:TODAY,time:t,status:s}));
+let seqN={assign:4,reg:16,pay:9,log:5,maint:4};
+const KEY="stms-v2",cl=s=>String(s).replace(/[<>]/g,""),esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({DB,seqN}))}catch(e){}}
+try{const sv=JSON.parse(localStorage.getItem(KEY));if(sv){Object.assign(DB,sv.DB);Object.assign(seqN,sv.seqN)}}catch(e){}
+function resetAll(){if(!window.__rc){window.__rc=1;toast("Click Reset again within 5 seconds to erase your edits and restore the sample data.");setTimeout(()=>window.__rc=0,5000);return}try{localStorage.removeItem(KEY)}catch(e){}location.reload()}
+const $=id=>document.getElementById(id),by=(a,id)=>a.find(x=>x.id==id);
+const inr=n=>"₹"+Number(n).toLocaleString("en-IN");
+const stu=i=>by(DB.students,i),rt=i=>by(DB.routes,i),bus=i=>by(DB.buses,i);
+const regName=r=>stu(r.sid).name;
+const pill=(t,c)=>`<span class="pill p-${c}">${t}</span>`;
+const stat=s=>pill(s.replace("_"," ").toLowerCase().replace(/^./,c=>c.toUpperCase()),{PICKED_UP:"ok",LATE:"warn",ABSENT:"bad",ACTIVE:"ok",ENDED:"n",INACTIVE:"n"}[s]||"n");
+// ---- business rules (mirror the MySQL triggers / constraints) ----
+const activeA=rid=>DB.assigns.find(a=>a.route==rid&&a.status=="ACTIVE");
+const enrolled=rid=>DB.regs.filter(r=>r.rid==rid&&r.status=="ACTIVE").length;
+function vReg(sid,rid,stop){
+ if(DB.regs.some(r=>r.sid==sid&&r.status=="ACTIVE"))return"Rejected: this student already has an active registration.";
+ if(!rt(rid).seq.some(s=>s[0]==stop))return`Rejected by composite FOREIGN KEY: ${DB.stops[stop]} is not a stop on ${rt(rid).name}.`;
+ const a=activeA(rid);if(!a)return"Rejected: no bus is actively assigned to this route.";
+ if(enrolled(rid)>=bus(a.bus).cap)return`Rejected by capacity trigger: bus ${bus(a.bus).reg} is full (${bus(a.bus).cap}/${bus(a.bus).cap} seats).`;return""}
+function vAssign(b,d,t,rid){
+ if(bus(b).status!="ACTIVE")return`Rejected: bus ${bus(b).reg} is under maintenance.`;
+ const A=DB.assigns.filter(a=>a.status=="ACTIVE");
+ if(A.some(a=>a.bus==b))return`Rejected by assignment trigger: bus ${bus(b).reg} already has an active assignment.`;
+ if(A.some(a=>a.drv==d))return`Rejected by assignment trigger: ${by(DB.drivers,d).name} is already actively assigned.`;
+ if(A.some(a=>a.att==t))return`Rejected by assignment trigger: ${by(DB.atts,t).name} is already actively assigned.`;
+ if(by(DB.drivers,d).exp<TODAY)return`Rejected: ${by(DB.drivers,d).name}'s license expired on ${by(DB.drivers,d).exp}.`;
+ if(A.some(a=>a.route==rid))return`Rejected: ${rt(rid).name} already has an active assignment.`;return""}
+function vLog(reg,date){return DB.logs.some(l=>l.reg==reg&&l.date==date)?"Rejected by UNIQUE (Registration_ID, Date): a pickup log already exists for this student today.":""}
+// ---- ui helpers ----
+let toastT;function toast(m,ok){const t=$("toast");t.textContent=m;t.className="show "+(ok?"ok":"err");clearTimeout(toastT);toastT=setTimeout(()=>t.className=ok?"ok":"err",4200)}
+function opts(arr,f,sel){return arr.map(x=>`<option value="${x.id}"${x.id==sel?" selected":""}>${f(x)}</option>`).join("")}
+function table(head,rows,empty){return rows.length?`<div class="tw"><table><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`:`<div class="empty">${empty||"Nothing to show yet."}</div>`}
+const bar=(n,m)=>{const p=Math.min(100,Math.round(n/m*100));return`<div class="bar"><i class="${n>=m?"full":p>=75?"near":""}" style="width:${p}%"></i></div>`};
+const regPlan=r=>{const p=DB.pays.filter(x=>x.reg==r.id);const pl=p.length?by(DB.plans,p[p.length-1].plan):DB.plans[0];const paid=p.reduce((s,x)=>s+x.amt,0);return{plan:pl,paid,due:Math.max(0,pl.amt-paid)}};
+const head=(t,s)=>`<h1>${t}</h1><p class="sub">${s}</p>`;
+// ---- views ----
+const NAVS={admin:[["dash","Dashboard"],["routes","Routes and stops"],["data","Master data"],["assign","Bus assignments"],["reg","Student registration"],["fees","Fees and payments"],["maint","Maintenance"],["reports","Reports"],["tests","Rule tests"]],driver:[["pickup","Daily pickup"]],parent:[["mine","My child"]]};
+const V={
+dash(){const rows=DB.routes.map(r=>{const a=activeA(r.id),b=a&&bus(a.bus),n=enrolled(r.id);return`<div style="margin-bottom:16px"><div class="row"><b>${r.name}</b><span class="mono">${b?`${n} of ${b.cap} seats`:"No bus assigned"}</span></div>${b?bar(n,b.cap):""}</div>`}).join("");
+ const l=k=>DB.logs.filter(x=>x.date==TODAY&&x.status==k).length,dues=DB.regs.filter(r=>r.status=="ACTIVE").reduce((s,r)=>s+regPlan(r).due,0),seats=DB.assigns.filter(a=>a.status=="ACTIVE").reduce((s,a)=>s+bus(a.bus).cap-enrolled(a.route),0);
+ const soon=DB.drivers.filter(d=>d.exp<"2027-01-01").map(d=>[d.name,d.exp,d.exp<TODAY?pill("Expired","bad"):pill("Expires soon","warn")]);
+ return head("Transport overview","Monday, 12 October 2026")+`<div class="grid k4"><div class="card kpi hot"><b>${DB.regs.filter(r=>r.status=="ACTIVE").length}</b><span>Students on transport</span></div><div class="card kpi"><b>${seats}</b><span>Open seats across active routes</span></div><div class="card kpi"><b>${l("PICKED_UP")+l("LATE")} / ${l("ABSENT")}</b><span>Picked up today / absent</span></div><div class="card kpi"><b>${inr(dues)}</b><span>Fees outstanding</span></div></div>
+ <div class="grid c2" style="margin-top:16px"><div class="card"><h2>Seat utilization by route</h2>${rows}</div><div class="card"><h2>Driver licenses needing attention</h2>${table(["Driver","License expiry","Status"],soon)}</div></div>`},
+routes(){const so=Object.entries(DB.stops).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
+ const card=r=>{const a=activeA(r.id);
+  const rows=r.seq.map(([st,t],i)=>`<tr><td>${i+1}</td><td><select onchange="rstop(${r.id},${i},+this.value)" aria-label="Stop">${Object.entries(DB.stops).map(([k,v])=>`<option value="${k}"${k==st?" selected":""}>${v}</option>`).join("")}</select></td><td><input type="time" value="${t}" onchange="rtime(${r.id},${i},this.value)" aria-label="Time"></td><td><div class="seg"><button onclick="rmove(${r.id},${i},-1)" aria-label="Move up">↑</button><button onclick="rmove(${r.id},${i},1)" aria-label="Move down">↓</button><button class="x" onclick="rrm(${r.id},${i})">Remove</button></div></td></tr>`).join("");
+  return`<div class="card"><div class="row" style="flex-wrap:nowrap"><input class="title-in" value="${esc(r.name)}" onchange="rname(${r.id},this.value)" aria-label="Route name">${a?pill(bus(a.bus).reg,"n"):pill("No bus","warn")}</div>${r.seq.length?`<div class="tw"><table><thead><tr><th>#</th><th>Stop</th><th>Time</th><th>Order</th></tr></thead><tbody>${rows}</tbody></table></div>`:`<div class="empty">No stops yet. Add the first stop below.</div>`}
+  <div class="form" style="margin-top:12px"><div><label>Stop to add</label><select id="ns${r.id}">${so}</select></div><div><label>Time</label><input id="nt${r.id}" type="time" value="07:45"></div><button class="btn am sm" onclick="radd(${r.id})">Add stop</button></div>
+  <div class="form" style="margin-top:12px"><div><label>Destination</label><input value="${esc(r.end)}" onchange="rf(${r.id},'end',this.value)"></div><div><label>Arrives</label><input type="time" value="${r.arr}" onchange="rf(${r.id},'arr',this.value)"></div><button class="btn ghost sm" onclick="delRoute(${r.id})">Delete route</button></div></div>`};
+ const sd=Object.entries(DB.stops).map(([k,v])=>[`<input value="${esc(v)}" onchange="snm(${k},this.value)" aria-label="Stop name">`,`<button class="btn sm ghost" onclick="delStop(${k})">Delete</button>`]);
+ return head("Routes and stops","Rename routes, reorder stops, change times, and add or remove stops. Changes apply on every screen.")+`<div class="row" style="margin-bottom:14px"><span class="mono">${DB.routes.length} routes</span><button class="btn am" onclick="addRoute()">Add route</button></div><div class="grid c2">${DB.routes.map(card).join("")}</div><div class="card" style="margin-top:16px"><div class="row" style="margin-bottom:8px"><h2 style="margin:0">Stop names</h2><button class="btn am sm" onclick="addStopDir()">Add stop</button></div>${table(["Name",""],sd)}</div>`},
+data(){const k=window.mdTab||"students",E=ENT[k];
+ const tabs=Object.keys(ENT).map(x=>`<button class="${x==k?"on":""}" onclick="mdTab='${x}';go('data')">${ENT[x].t}</button>`).join("");
+ const rows=E.a().map(o=>E.c.map(c=>cell(k,o.id,c,o[c[0]])).concat([`<button class="btn sm ghost" onclick="delE('${k}',${o.id})">Delete</button>`]));
+ return head("Master data","Edit any name or value directly in the table. Changes save automatically and apply across every screen.")+`<div class="card" style="margin-bottom:16px"><h2>School name</h2><div style="max-width:380px"><input value="${esc(DB.school)}" onchange="DB.school=cl(this.value).trim()||DB.school;shell();toast('Saved.',1)" aria-label="School name"></div></div><div class="tabs">${tabs}</div><div class="card"><div class="row" style="margin-bottom:8px"><h2 style="margin:0">${E.t}</h2><button class="btn am sm" onclick="addE('${k}')">Add ${E.s}</button></div>${table(E.c.map(c=>c[1]).concat([""]),rows)}</div>`},
+assign(){const rows=DB.assigns.map(a=>[rt(a.route).name,bus(a.bus).reg,by(DB.drivers,a.drv).name,by(DB.atts,a.att).name,stat(a.status),a.status=="ACTIVE"?`<button class="btn sm ghost" onclick="endA(${a.id})">End assignment</button>`:""]);
+ return head("Bus assignments","One active assignment per bus, driver and attendant. Drivers with an expired license are rejected.")+`<div class="card" style="margin-bottom:16px"><h2>New assignment</h2><div class="form"><div><label>Route</label><select id="fR">${opts(DB.routes,r=>r.name)}</select></div><div><label>Bus</label><select id="fB">${opts(DB.buses,b=>b.reg+" · "+b.cap+" seats")}</select></div><div><label>Driver</label><select id="fD">${opts(DB.drivers,d=>d.name+" (exp "+d.exp+")")}</select></div><div><label>Attendant</label><select id="fT">${opts(DB.atts,a=>a.name)}</select></div><button class="btn am" onclick="addA()">Assign</button></div></div><div class="card">${table(["Route","Bus","Driver","Attendant","Status",""],rows)}</div>`},
+reg(){const free=DB.students.filter(s=>!DB.regs.some(r=>r.sid==s.id&&r.status=="ACTIVE"));
+ const rows=DB.regs.map(r=>[regName(r),"Grade "+stu(r.sid).grade,rt(r.rid).name,DB.stops[r.stop],stat(r.status),r.status=="ACTIVE"?`<button class="btn sm ghost" onclick="deact(${r.id})">Deactivate</button>`:""]);
+ return head("Student registration","Map each student to a route and a stop. Seats are checked against the assigned bus.")+`<div class="card" style="margin-bottom:16px"><h2>Register a student</h2><div class="form"><div><label>Student</label><select id="gS">${opts(free,s=>s.name+" · Grade "+s.grade)}</select></div><div><label>Route</label><select id="gR">${opts(DB.routes,r=>r.name+" ("+enrolled(r.id)+" enrolled)")}</select></div><div><label>Stop</label><select id="gP">${Object.entries(DB.stops).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></div><button class="btn am" onclick="addR()">Register</button></div></div><div class="card">${table(["Student","Grade","Route","Stop","Status",""],rows)}</div>`},
+fees(){const rows=DB.regs.filter(r=>r.status=="ACTIVE").map(r=>{const f=regPlan(r);return[regName(r),rt(r.rid).name,f.plan.name+" · "+inr(f.plan.amt),inr(f.paid),f.due?pill(inr(f.due)+" due","bad"):pill("Paid","ok")]});
+ const act=DB.regs.filter(r=>r.status=="ACTIVE");
+ return head("Fees and payments","Record a payment against a registration and a fee plan.")+`<div class="card" style="margin-bottom:16px"><h2>Record a payment</h2><div class="form"><div><label>Registration</label><select id="pR">${opts(act,r=>regName(r))}</select></div><div><label>Fee plan</label><select id="pP">${opts(DB.plans,p=>p.name+" · "+inr(p.amt))}</select></div><div><label>Amount paid (₹)</label><input id="pA" type="number" min="1" value="1500"></div><button class="btn am" onclick="addP()">Save payment</button></div></div><div class="card">${table(["Student","Route","Fee plan","Paid","Balance"],rows)}</div>`},
+maint(){const rows=[...DB.maint].reverse().map(m=>[bus(m.bus).reg,m.date,m.desc,inr(m.cost),`<button class="btn sm ghost" onclick="delM(${m.id})">Delete</button>`]);
+ return head("Vehicle maintenance","Service history for every bus.")+`<div class="card" style="margin-bottom:16px"><h2>Log a service</h2><div class="form"><div><label>Bus</label><select id="mB">${opts(DB.buses,b=>b.reg)}</select></div><div><label>Service date</label><input id="mD" type="date" value="${TODAY}"></div><div><label>Description</label><input id="mT" placeholder="e.g. Tyre rotation"></div><div><label>Cost (₹)</label><input id="mC" type="number" min="0" value="0"></div><button class="btn am" onclick="addM()">Save record</button></div></div><div class="card">${table(["Bus","Date","Work done","Cost",""],rows)}</div>`},
+reports(){const util=DB.assigns.filter(a=>a.status=="ACTIVE").map(a=>[rt(a.route).name,bus(a.bus).cap,enrolled(a.route),Math.round(enrolled(a.route)/bus(a.bus).cap*100)+"%"]);
+ const unpaid=DB.regs.filter(r=>r.status=="ACTIVE").map(r=>[r,regPlan(r)]).filter(x=>x[1].due).map(([r,f])=>[regName(r),rt(r.rid).name,inr(f.paid)+" of "+inr(f.plan.amt),pill(inr(f.due),"bad")]);
+ const asg=DB.assigns.filter(a=>a.status=="ACTIVE").map(a=>[rt(a.route).name,by(DB.drivers,a.drv).name,by(DB.atts,a.att).name,bus(a.bus).reg]);
+ const abs=DB.logs.filter(l=>l.date==TODAY&&l.status=="ABSENT").map(l=>{const r=by(DB.regs,l.reg);return[regName(r),rt(r.rid).name,DB.stops[r.stop]]});
+ return head("Reports","The four reports from the functional requirements.")+`<div class="grid c2"><div class="card"><h2>Capacity utilization</h2>${table(["Route","Capacity","Enrolled","Used"],util)}</div><div class="card"><h2>Unpaid fees</h2>${table(["Student","Route","Paid","Due"],unpaid,"No dues.")}</div><div class="card"><h2>Driver assignments</h2>${table(["Route","Driver","Attendant","Bus"],asg)}</div><div class="card"><h2>Absent students today</h2>${table(["Student","Route","Stop"],abs,"No absences logged today.")}</div></div>`},
+tests(){const R=DB.regs.find(r=>r.rid==1&&DB.logs.some(l=>l.reg==r.id&&l.date==TODAY));
+ const T=[["Over-capacity registration","Register a student on Lakeview, whose bus is full",()=>vReg(16,2,5)],["Second active assignment","Assign Bus TS-09-UA-1021, already on Green Valley",()=>vAssign(1,1,4,3)],["Expired driver license","Assign Anil Goud (expired 2026-05-10)",()=>vAssign(4,3,4,3)],["Duplicate pickup log","Log the same student twice on one date",()=>vLog(R.id,TODAY)],["Stop outside route","Map a student to a stop that is not on the route",()=>vReg(16,1,9)]];
+ return head("Rule tests","Each business rule is attempted with bad input. All five should be rejected.")+`<div class="card"><div class="row" style="margin-bottom:10px"><h2 style="margin:0">Constraint test cases</h2><button class="btn am" onclick="runT()">Run all tests</button></div><div class="tw"><table class="tests"><thead><tr><th>Test case</th><th>Action</th><th>Result</th></tr></thead><tbody>${T.map((t,i)=>`<tr><td>${t[0]}</td><td>${t[1]}</td><td id="t${i}">${pill("Not run","n")}<div class="mono">${window.__run?t[2]():""}</div></td></tr>`).join("")}</tbody></table></div></div>`},
+pickup(){const d=by(DB.drivers,window.drv||1);const a=DB.assigns.find(x=>x.drv==d.id&&x.status=="ACTIVE");
+ const sel=`<div style="max-width:300px;margin-bottom:18px"><label>Signed in as</label><select onchange="drv=this.value;go('pickup')">${opts(DB.drivers,x=>x.name,d.id)}</select></div>`;
+ if(!a)return head("Daily pickup","Mark each student as picked up, late or absent.")+sel+`<div class="card empty">${d.name} has no active route. Ask the transport admin for an assignment.</div>`;
+ const r=rt(a.route),regs=DB.regs.filter(x=>x.rid==r.id&&x.status=="ACTIVE");
+ const rows=r.seq.map(([s,t])=>{const here=regs.filter(x=>x.stop==s);return here.length?`<div class="card" style="margin-bottom:12px"><div class="row"><b>${DB.stops[s]}</b><span class="mono">${t}</span></div>${table(["Student","Today",""],here.map(x=>{const l=DB.logs.find(q=>q.reg==x.id&&q.date==TODAY);return[regName(x)+` <span class="mono">Grade ${stu(x.sid).grade}</span>`,l?stat(l.status)+(l.time?` <span class="mono">${l.time}</span>`:""):pill("Not marked","n"),`<div class="seg"><button class="a" onclick="mark(${x.id},'PICKED_UP')">Picked up</button><button class="l" onclick="mark(${x.id},'LATE')">Late</button><button class="x" onclick="mark(${x.id},'ABSENT')">Absent</button></div>`]}))}</div>`:""}).join("");
+ const L=DB.logs.filter(l=>l.date==TODAY&&regs.some(x=>x.id==l.reg));
+ return head("Daily pickup",`${r.name} · ${bus(a.bus).reg} · ${L.length} of ${regs.length} students marked`)+sel+rows},
+mine(){const c=by(DB.regs,window.kid||1),r=rt(c.rid),f=regPlan(c),l=DB.logs.find(q=>q.reg==c.id&&q.date==TODAY),a=activeA(r.id),dr=a&&by(DB.drivers,a.drv);
+ const ST=stu(c.sid),time=r.seq.find(s=>s[0]==c.stop)[1],ps=DB.pays.filter(p=>p.reg==c.id).map(p=>[p.date,by(DB.plans,p.plan).name,inr(p.amt)]);
+ return head("My child's transport","Read-only view of route, pickup and fees.")+`<div style="max-width:300px;margin-bottom:18px"><label>Child</label><select onchange="kid=this.value;go('mine')">${opts(DB.regs.filter(x=>x.status=="ACTIVE"),x=>regName(x),c.id)}</select></div>
+ <div class="grid k4"><div class="card kpi hot"><b>${time}</b><span>Pickup at ${DB.stops[c.stop]}</span></div><div class="card kpi"><b>${l?stat(l.status):pill("Not yet","n")}</b><span>Today's status</span></div><div class="card kpi"><b>${f.due?inr(f.due):"Paid"}</b><span>${f.due?"Balance due":"Fees up to date"}</span></div></div>
+ <div class="grid c2" style="margin-top:16px"><div class="card"><h2>${r.name} route</h2><ul class="tl">${r.seq.map(([s,t])=>`<li class="${s==c.stop?"me":""}"><b>${DB.stops[s]}</b>${s==c.stop?" "+pill("Your stop","warn"):""}<br><small>${t}</small></li>`).join("")}<li><b>${r.end}</b><br><small>${r.arr}</small></li></ul>${a?`<div class="mono">Bus ${bus(a.bus).reg} · Driver ${dr.name}</div>`:""}</div><div class="card"><h2>Payment history</h2>${table(["Date","Plan","Amount"],ps,"No payments recorded yet.")}<div class="mono" style="margin-top:10px">${ST.name} · Grade ${ST.grade} · Parent contact ${ST.contact}</div></div></div>`}};
+// ---- actions ----
+function addA(){const[b,d,t,r]=["fB","fD","fT","fR"].map(i=>+$(i).value);const e=vAssign(b,d,t,r);if(e)return toast(e);DB.assigns.push({id:seqN.assign++,bus:b,route:r,drv:d,att:t,status:"ACTIVE"});toast("Assignment saved.",1);go("assign")}
+function endA(id){by(DB.assigns,id).status="ENDED";toast("Assignment ended.",1);go("assign")}
+function addR(){const s=+$("gS").value,r=+$("gR").value,p=+$("gP").value;const e=vReg(s,r,p);if(e)return toast(e);DB.regs.push({id:seqN.reg++,sid:s,rid:r,stop:p,status:"ACTIVE",start:TODAY});toast("Registration saved.",1);go("reg")}
+function deact(id){by(DB.regs,id).status="INACTIVE";toast("Registration deactivated.",1);go("reg")}
+function addP(){const a=+$("pA").value;if(!(a>0))return toast("Enter an amount greater than zero.");DB.pays.push({id:seqN.pay++,reg:+$("pR").value,plan:+$("pP").value,amt:a,date:TODAY});toast("Payment recorded.",1);go("fees")}
+function delM(id){DB.maint.splice(DB.maint.findIndex(m=>m.id==id),1);toast("Record deleted.",1);go("maint")}
+function addM(){const t=$("mT").value.trim();if(!t)return toast("Describe the work done.");DB.maint.push({id:seqN.maint++,bus:+$("mB").value,date:$("mD").value,cost:+$("mC").value||0,desc:t});toast("Service record saved.",1);go("maint")}
+function mark(reg,st){const e=vLog(reg,TODAY);if(e)return toast(e);const n=new Date();DB.logs.push({id:seqN.log++,reg,date:TODAY,status:st,time:st=="ABSENT"?"":String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0")});toast(regName(by(DB.regs,reg))+" marked "+st.replace("_"," ").toLowerCase()+".",1);go("pickup")}
+function runT(){window.__run=1;go("tests");[...document.querySelectorAll("#main tbody tr")].forEach(tr=>{const m=tr.querySelector(".mono").textContent;tr.lastElementChild.firstChild.outerHTML=m?pill("Rejected as expected","ok"):pill("Not rejected","bad")});window.__run=0}
+// ---- master data editing ----
+const ENT={
+students:{t:"Students",s:"student",a:()=>DB.students,c:[["name","Name"],["grade","Grade"],["contact","Parent contact"]],mk:()=>({name:"New student",grade:"1",contact:"+91 "}),used:i=>DB.regs.some(r=>r.sid==i)},
+buses:{t:"Buses",s:"bus",a:()=>DB.buses,c:[["reg","Registration no."],["cap","Capacity","number"],["model","Model"],["status","Status",["ACTIVE","MAINTENANCE"]]],mk:()=>({reg:"TS-00-XX-"+(1000+DB.buses.length),cap:30,model:"New bus",status:"ACTIVE"}),used:i=>DB.assigns.some(a=>a.bus==i)||DB.maint.some(m=>m.bus==i)},
+drivers:{t:"Drivers",s:"driver",a:()=>DB.drivers,c:[["name","Name"],["lic","Licence no."],["exp","Licence expiry","date"]],mk:()=>({name:"New driver",lic:"LIC"+(1000+DB.drivers.length),exp:"2028-01-01"}),used:i=>DB.assigns.some(a=>a.drv==i)},
+atts:{t:"Attendants",s:"attendant",a:()=>DB.atts,c:[["name","Name"]],mk:()=>({name:"New attendant"}),used:i=>DB.assigns.some(a=>a.att==i)},
+plans:{t:"Fee plans",s:"fee plan",a:()=>DB.plans,c:[["name","Plan name"],["amt","Amount (₹)","number"],["cycle","Billing cycle",["Monthly","Quarterly","Yearly"]]],mk:()=>({name:"New plan",amt:1000,cycle:"Monthly"}),used:i=>DB.pays.some(p=>p.plan==i)}};
+function cell(k,id,c,v){const f=c[0],ty=c[2],h=`onchange="ed('${k}',${id},'${f}',this.value)" aria-label="${c[1]}"`;
+ if(Array.isArray(ty))return`<select ${h}>${ty.map(o=>`<option${o==v?" selected":""}>${o}</option>`).join("")}</select>`;
+ return`<input type="${ty||"text"}" value="${esc(v)}" ${ty=="number"?'min="1"':""} ${h}>`}
+function ed(k,id,f,v){const o=by(ENT[k].a(),id),c=ENT[k].c.find(x=>x[0]==f);let e="";
+ if(c[2]=="number")v=+v;else v=cl(v).trim();
+ if(c[2]=="number"&&!(v>0))e="Enter a number greater than zero (CHECK constraint).";
+ else if(!v)e="This field can't be empty.";
+ else if(k=="buses"&&f=="reg"&&DB.buses.some(b=>b.id!=id&&b.reg==v))e="Rejected by UNIQUE: that registration number already exists.";
+ else if(k=="drivers"&&f=="lic"&&DB.drivers.some(d=>d.id!=id&&d.lic==v))e="Rejected by UNIQUE: that licence number already exists.";
+ else if(k=="buses"&&f=="cap"){const a=DB.assigns.find(x=>x.bus==id&&x.status=="ACTIVE");if(a&&enrolled(a.route)>v)e=`Rejected: ${enrolled(a.route)} students are enrolled on this bus's route, so capacity can't go below that.`}
+ else if(k=="buses"&&f=="status"&&v!="ACTIVE"&&DB.assigns.some(x=>x.bus==id&&x.status=="ACTIVE"))e="End this bus's active assignment before taking it out of service.";
+ if(e){toast(e);return go(page)}
+ o[f]=v;save();toast("Saved.",1)}
+function addE(k){const E=ENT[k],a=E.a();a.push({id:Math.max(0,...a.map(x=>x.id))+1,...E.mk()});toast("Added. Edit the new row to fill in details.",1);go("data")}
+function delE(k,id){if(ENT[k].used(id))return toast("Rejected by FOREIGN KEY: this record is used by registrations, assignments, payments or maintenance.");const a=ENT[k].a();a.splice(a.findIndex(x=>x.id==id),1);toast("Deleted.",1);go("data")}
+function rname(id,v){const r=rt(id);r.name=cl(v).trim()||r.name;save();toast("Saved.",1)}
+function rf(id,f,v){rt(id)[f]=cl(v);save();toast("Saved.",1)}
+function rtime(id,i,v){if(v){rt(id).seq[i][1]=v;save();toast("Saved.",1)}}
+function rstop(id,i,v){const r=rt(id),old=r.seq[i][0];if(r.seq.some((x,j)=>j!=i&&x[0]==v)){toast("Rejected by UNIQUE: that stop is already on this route.");return go("routes")}const n=DB.regs.filter(x=>x.rid==id&&x.stop==old&&x.status=="ACTIVE").length;if(n){toast(`Rejected: ${n} student(s) use ${DB.stops[old]}. Move them first.`);return go("routes")}r.seq[i][0]=v;save();toast("Saved.",1)}
+function rmove(id,i,d){const q=rt(id).seq,j=i+d;if(j<0||j>=q.length)return;[q[i],q[j]]=[q[j],q[i]];go("routes")}
+function rrm(id,i){const r=rt(id),st=r.seq[i][0],n=DB.regs.filter(x=>x.rid==id&&x.stop==st&&x.status=="ACTIVE").length;if(n)return toast(`Rejected: ${n} student(s) use ${DB.stops[st]}. Move them first.`);r.seq.splice(i,1);toast("Stop removed.",1);go("routes")}
+function radd(id){const st=+$("ns"+id).value,r=rt(id);if(r.seq.some(x=>x[0]==st))return toast("Rejected by UNIQUE: that stop is already on this route.");r.seq.push([st,$("nt"+id).value||"07:45"]);toast("Stop added.",1);go("routes")}
+function addRoute(){DB.routes.push({id:Math.max(0,...DB.routes.map(r=>r.id))+1,name:"New route",start:"",end:"School Campus",arr:"07:50",seq:[]});toast("Route added. Name it and add stops.",1);go("routes")}
+function delRoute(id){if(DB.regs.some(r=>r.rid==id)||DB.assigns.some(a=>a.route==id))return toast("Rejected by FOREIGN KEY: this route is referenced by registrations or assignments.");DB.routes.splice(DB.routes.findIndex(r=>r.id==id),1);toast("Route deleted.",1);go("routes")}
+function snm(id,v){v=cl(v).trim();if(!v){toast("A stop needs a name.");return go("routes")}DB.stops[id]=v;save();toast("Saved.",1)}
+function addStopDir(){const id=Math.max(0,...Object.keys(DB.stops).map(Number))+1;DB.stops[id]="New stop";toast("Stop added. Rename it below.",1);go("routes")}
+function delStop(id){if(DB.routes.some(r=>r.seq.some(x=>x[0]==id))||DB.regs.some(r=>r.stop==id))return toast("Rejected by FOREIGN KEY: this stop is used on a route or by a registration.");delete DB.stops[id];toast("Stop deleted.",1);go("routes")}
+// ---- shell ----
+let role="admin",page="dash";
+const HOME={admin:"dash",driver:"pickup",parent:"mine"};
+function shell(){$("sname").textContent=DB.school;document.title=DB.school+" · Transport";save();$("roles").innerHTML=[["admin","Admin"],["driver","Driver"],["parent","Parent"]].map(([k,v])=>`<button class="${k==role?"on":""}" onclick="setRole('${k}')">${v}</button>`).join("");
+ $("nav").innerHTML=NAVS[role].map(([k,v])=>`<button class="${k==page?"on":""}" onclick="go('${k}')">${v}</button>`).join("");
+ $("main").innerHTML=V[page]();}
+function go(p){page=p;shell()}
+function setRole(r){role=r;page=HOME[r];shell();window.scrollTo(0,0)}
+shell();
+</script>
+</body>
+</html>

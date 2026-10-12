@@ -1,75 +1,48 @@
-# RouteWise — School Transport Management System (Prototype)
+# School Transport Management System (DBMS Prototype)
 
-A modern, responsive, multi-role front-end prototype designed for the **School Transport Route & Student Pickup Management System** DBMS Project-Based Learning (PBL) curriculum.
+An interactive, responsive single-page web prototype for the **School Transport Management System**, simulating a complete database-backed transport management platform for schools.
+
+This prototype enforces relational DBMS constraints and business rules on the client side (simulating MySQL triggers, foreign keys, unique constraints, and check constraints), complete with automatic browser persistence (`localStorage`).
 
 ---
 
 ## 🌟 Key Features & Modules
 
 ### 1. 👥 Multi-Role Portal Switcher
-Switch instantly between all three primary stakeholders via the top bar:
-- **Admin Workspace:** Complete administrative control over buses, routes, driver licensing, fee ledgers, and student registries.
-- **Driver Companion View:** Handheld trip assistant displaying approaching stops, student manifest checklist (with tap-to-mark boarding), delay notifications, and emergency SOS triggers.
-- **Parent & Student Portal:** Real-time bus radar tracker, child boarding status, driver contact card, and transport fee payment receipts.
+Switch instantly between all three primary stakeholders via the sidebar:
+- **Admin Workspace:** Complete administrative control over buses, routes, driver licensing, fee ledgers, student registries, maintenance, reports, and rule validation tests.
+- **Driver Companion View:** Handheld daily pickup register for route drivers to mark students as *Picked up*, *Late*, or *Absent* with automated timestamps.
+- **Parent & Student Portal:** Dedicated view for parents showing child pickup time, stop timeline, bus registration, driver contact card, and payment receipt history.
 
-### 2. 🗺️ Live Bus Tracking & Radar
-- Animated SVG transit vector map with moving vehicle telemetry.
-- Heads-Up Display (HUD) showing GPS speed, passenger load, and next-stop ETA countdown.
-- Interactive route selector supporting Route 01 (Siddipet), Route 02 (Gajwel), Route 03 (Dubbak), and Route 04 (Cheriyal).
-- Step-by-step ordered stop timeline linked to the `ROUTE_SEQUENCE` relational table.
+### 2. 🗄️ Relational DBMS Triggers & Constraints Simulation
+All business logic mirrors strict SQL schema constraints and database triggers:
+- **Bus Capacity Trigger:** Enforces seating limits (`CHECK (Capacity > 0)`) and prevents over-capacity student enrollments on active bus routes.
+- **Composite Foreign Key:** Guarantees that stops assigned to a student strictly belong to the selected route sequence.
+- **Unique Constraint (`UNIQUE(Registration_ID, Date)`):** Prevents duplicate daily pickup logs for a student on the same calendar date.
+- **Driver License Expiry Validation:** Automatically detects and rejects assignments for drivers whose licenses have expired.
+- **Single Active Assignment Rule:** Ensures a vehicle, driver, or attendant cannot be actively assigned to multiple concurrent routes.
+- **Referential Integrity on Deletion:** Rejects deletion of stops or routes currently referenced by active student registrations.
 
-### 3. 👨‍🎓 Student Directory (Full CRUD)
-- Comprehensive student directory with search by name, student ID, grade, and bus stop.
-- Route and status filters.
-- **Register Student Modal:** Enforces bus capacity constraints (`CHECK (Capacity > 0)`).
-- Edit student contacts and remove inactive registrations with automatic count recalculation.
+### 3. 📊 Analytical Reports
+Directly satisfies DBMS project reporting requirements:
+1. **Capacity Utilization Report:** Enrolled student counts vs. bus seating limits per route.
+2. **Unpaid Fees / Balance Due Report:** Identifies student balances and fee plan payment progress.
+3. **Driver & Crew Route Assignments:** Current driver, attendant, and bus vehicle mapping.
+4. **Daily Pickup & Absenteeism Log:** Audit log of all absent students for the day.
 
-### 4. 🛣️ Routes & Stops Sequence Builder
-- Real-time bus capacity utilization progress bars with warning triggers when exceeding 90% load.
-- Interactive stop sequencing and landmark previews.
-- **Add New Route Modal:** Assign origin, destination, and bus vehicle.
-
-### 5. 🚌 Fleet & Crew Management
-- Vehicle inventory displaying plate numbers, model, odometer, and fuel levels.
-- **Database Trigger Enforcement:** Visual warning badges for expired driver licenses (`License_Expiry` trigger) and overdue vehicle maintenance.
-- Log maintenance and reassign driver controls.
-
-### 6. 📋 Pickup Attendance Register
-- Live digital boarding register for morning and evening trips.
-- Toggle individual student statuses (`Picked up`, `Late`, `Absent`, `Pending`) or use batch buttons (`Mark All Picked Up`, `Mark All Absent`).
-- Real-time reactivity updates the Dashboard KPI completion rate and Donut Chart segments dynamically!
-
-### 7. 💳 Fees & Billing Ledger
-- Overview of total invoiced fees, collected revenue, and outstanding student balances.
-- **Record Payment Modal:** Choose payment mode (UPI, Netbanking, Card, Cash) and generate transaction receipt IDs.
-
-### 8. 📊 Analytical Reports & CSV Export
-Directly fulfills the Review 2 & 3 DBMS query objectives with one-click CSV export:
-1. **Bus Capacity Utilization Report:** Enrolled students vs. vehicle seating limits.
-2. **Fee Defaulters Report:** Students with outstanding fee balances for automated reminder notices.
-3. **Daily Pickup & Absenteeism Log:** Attendance timestamps and boarding audit.
-4. **Fleet & Crew Compliance Audit:** License expiration dates and vehicle maintenance schedules.
-
-### 9. 🗄️ DBMS 13-Table Spec Modal
-Interactive architectural review modal detailing:
-- 13 Normalized Relational Tables (3NF): `BUS`, `ROUTE`, `STOP`, `ROUTE_SEQUENCE`, `DRIVER`, `ATTENDANT`, `STUDENT`, `TRANSPORT_REGISTRATION`, `PICKUP_LOG`, `FEE_PLAN`, `PAYMENT`, `MAINTENANCE_RECORD`, and `BUS_ASSIGNMENT`.
-- Business rules enforced by SQL triggers (Capacity limit, single active assignment, licence verification, unique daily pickup logs).
+### 4. 🧪 Interactive Constraint Rule Tests
+Includes a dedicated **Rule tests** view that tests database constraint rejections against bad inputs:
+- Over-capacity registration attempt
+- Second active assignment attempt
+- Expired driver license assignment attempt
+- Duplicate daily pickup log attempt
+- Stop outside route mapping attempt
 
 ---
 
 ## 🚀 How to Run
 
-1. Open the `school_transport_prototype` directory.
-2. Double-click `index.html` to launch directly in any modern browser (Chrome, Edge, Firefox, Safari).
-3. No installation, server, or build step required.
-
-> **Tip:** You can also run a quick local HTTP server using Python:
-> ```bash
-> python -m http.server 8000
-> ```
-> Then visit `http://localhost:8000` in your browser.
-
----
-
-## 💾 Local Storage Persistence
-All actions performed in the prototype (registering a student, recording a fee payment, changing attendance, or adding routes) are saved to your browser's `localStorage`. You can restore original seed data at any time using the **"Reset Demo Data"** link in the footer.
+1. Simply double-click [`index.html`](index.html) or [`School Transport Management System.html`](School%20Transport%20Management%20System.html) in any modern web browser (Chrome, Edge, Firefox, Safari).
+2. No installation, server, or npm build steps required!
+3. **Data Persistence:** All edits (modifying master data, reordering stops, recording payments, logging attendance) are saved automatically in `localStorage`.
+4. **Reset Sample Data:** Click **"Reset sample data"** in the sidebar at any time to restore the original seed data.
