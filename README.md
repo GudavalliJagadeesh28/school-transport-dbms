@@ -577,6 +577,9 @@ school-transport-dbms/
 ├── School_Transport_DBMS_Review1.pptx         # Review 1 Presentation Slides (Conceptual design & ER modeling)
 ├── School_Transport_DBMS_Review2.pptx         # Review 2 Presentation Slides (3NF normalization & SQL schema)
 ├── School_Transport_DBMS_Review3.pptx         # Review 3 Presentation Slides (Prototype implementation & testing)
+├── DBMS/                                      # Lab & practice problem solutions
+│   ├── hacker rank d.pdf                      # HackerRank SQL solutions & test submissions
+│   └── leet code d.pdf                        # LeetCode SQL problem submissions (jaggu1234)
 └── python-app/                                # Full-stack Python Flask + MySQL backend implementation
     ├── app.py                                 # Flask backend controller with parameterized SQL & triggers
     ├── schema.sql                             # 13-table MySQL database schema with triggers & analytical views
